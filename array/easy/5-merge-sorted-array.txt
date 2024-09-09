@@ -1,0 +1,42 @@
+// https://leetcode.com/problems/merge-sorted-array
+
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        for (int j = 0, i = m; j < n; j++) {
+            nums1[i] = nums2[j];
+            i++;
+        }
+        Arrays.sort(nums1);
+    }
+}
+
+Time complexity: O((m+n)log(m+n)) due to the sort() function
+Space complexity: O(1) We are not using any extra space, so the space complexity is O(1).
+
+2. Two Pointer: [Optimal]
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        // Start from the end of both arrays
+        int i = m - 1; // Pointer for nums1
+        int j = n - 1; // Pointer for nums2
+        int k = m + n - 1; // Pointer for the end of merged array
+        
+        // Merge nums1 and nums2 from the end
+        while (i >= 0 && j >= 0) {
+            if (nums1[i] > nums2[j]) {
+                nums1[k--] = nums1[i--];
+            } else {
+                nums1[k--] = nums2[j--];
+            }
+        }
+        
+        // If any elements left in nums2, copy them to nums1
+        while (j >= 0) {
+            nums1[k--] = nums2[j--];
+        }
+    }
+}
+
+Time Complexity: O(m + n) — We traverse both arrays once.
+Space Complexity: O(1) — No extra space is used beyond the input arrays.
+========================================================================================================================
