@@ -1,0 +1,114 @@
+// https://leetcode.com/problems/contains-duplicate/
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        // Create a HashSet to store unique elements
+        HashSet<Integer> set = new HashSet<>();
+
+        // Iterate over the array
+        for (int num : nums) {
+            // If the set already contains the number, return true
+            if (set.contains(num)) {
+                return true;
+            }
+            // Add the number to the set
+            set.add(num);
+        }
+
+        // If no duplicates were found, return false
+        return false;
+    }
+}
+
+/*
+ * Time Complexity: O(n) — We iterate over the array once, and each
+ * insertion/check in the HashSet is O(1) on average.
+ * Space Complexity: O(n) — We use additional space for storing elements in the
+ * HashSet.
+ * 
+ * //
+ * =============================================================================
+ * ===========
+ * 1. Brufe Force without sorting the array->O(n2)
+ * class Solution {
+ * public boolean containsDuplicate(int[] nums) {
+ * // Compare every pair of elements
+ * for (int i = 0; i < nums.length; i++) {
+ * for (int j = i + 1; j < nums.length; j++) {
+ * if (nums[i] == nums[j]) {
+ * return true;
+ * }
+ * }
+ * }
+ * return false;
+ * }
+ * }
+ * 
+ * Time Complexity: O(n²) — We use two nested loops to check every pair of
+ * elements.
+ * Space Complexity: O(1) — No additional space is required.
+ * 
+ * =============================================================================
+ * ===========
+ * 2. Sort the array firstly then search-> O(nlogn)
+ * 
+ * class Solution {
+ * public boolean containsDuplicate(int[] nums) {
+ * // Sort the array first
+ * Arrays.sort(nums);
+ * 
+ * // Compare each element with its next element
+ * for (int i = 0; i < nums.length - 1; i++) {
+ * if (nums[i] == nums[i + 1]) {
+ * return true;
+ * }
+ * }
+ * return false;
+ * }
+ * }
+ * 
+ * Time Complexity: O(n log n) — Sorting the array dominates the time
+ * complexity.
+ * Space Complexity: O(1) (or O(n) depending on the sorting algorithm) —
+ * 
+ * Sorting can be done in place, so no extra space is needed except for the
+ * input array itself.
+ * =============================================================================
+ * ===========
+ * 3. Use hashSet (if you are okay with space Complexity) -> Time: O(n), Space:
+ * O(n)
+ * 
+ * // Code in top of file
+ * 
+ * =============================================================================
+ * ===========
+ * 4. use hashMap:
+ * 
+ * class Solution {
+ * public boolean containsDuplicate(int[] nums) {
+ * // Create a HashMap to count occurrences of each element
+ * HashMap<Integer, Integer> map = new HashMap<>();
+ * 
+ * // Iterate over the array
+ * for (int num : nums) {
+ * // If the number is already in the map, return true
+ * if (map.containsKey(num)) {
+ * return true;
+ * }
+ * // Add the number to the map with a count of 1
+ * map.put(num, 1);
+ * }
+ * 
+ * // If no duplicates were found, return false
+ * return false;
+ * }
+ * }
+ * 
+ * Time Complexity: O(n) — We iterate over the array once, and each
+ * insertion/check in the HashMap is O(1) on average.
+ * Space Complexity: O(n) — We use additional space for storing elements in the
+ * HashMap.
+ * 
+ * =============================================================================
+ * ===========
+ * 
+ */
