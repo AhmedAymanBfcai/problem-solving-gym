@@ -1,0 +1,98 @@
+// https://leetcode.com/problems/two-sum/
+
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            int diff = target - nums[i];
+
+            if (map.containsKey(diff)) {
+                return new int[] { map.get(diff), i };
+            }
+
+            map.put(nums[i], i);
+        }
+
+        return null;
+    }}
+
+    Time Complexity:
+
+    O(n) — We loop through the array only once.
+Space Complexity: O(n) — We use additional space to store the hash map.
+================================================
+/*
+
+4 Solutions possible in my mind for this problem:
+1. Without sorting the array: Check Remaining [target - numx[i]] -> O(n2) as the array is not sorted
+2. Sort the array, [target - numx[i]] and you will search in sorted array by using Binar search -> O(nlogn)
+3. Use Hash Map: Code above
+4. 2-pointers
+
+*/
+
+// Brufe force:
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        // Loop through each element in the array
+        for (int i = 0; i < nums.length; i++) {
+            // For each element, check every other element
+            for (int j = i + 1; j < nums.length; j++) {
+                // Check if the sum of two elements is equal to the target
+                if (nums[i] + nums[j] == target) {
+                    // Return their indices
+                    return new int[] { i, j };
+                }
+            }
+        }
+        // Return null if no solution is found
+        return null;
+    }
+}
+
+Time Complexity: O(n²) — We are using two nested loops.
+Space Complexity: O(1) — We are not using any additional space.
+================================================
+4. Sorting and
+
+Two Pointers (Not Suitable for Index Retrieval)
+// This approach involves sorting the array and using the two-pointer technique to find the two numbers that sum to the target. 
+// However, since this approach requires modifying the original array (which affects the index retrieval), 
+// it's typically not used unless index retrieval is not required.
+
+import java.util.Arrays;
+
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        Arrays.sort(nums); // This changes the array order
+
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (left < right) {
+            int sum = nums[left] + nums[right];
+
+            if (sum == target) {
+                // This won't return the original indices, just a rough version
+                return new int[] { left, right };
+            } else if (sum < target) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+        return null;
+    }
+}
+
+Time Complexity:
+
+O(n log n) — Sorting takes
+
+O(n log n) and the two-pointer search
+
+is O(n).
+Space Complexity: O(1) — No extra space used, except for the sorting.
+================================================
