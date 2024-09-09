@@ -19,7 +19,7 @@ class Solution {
 
     Time Complexity:
 
-    O(n) — We loop through the array only once.
+O(n) — We loop through the array only once.
 Space Complexity: O(n) — We use additional space to store the hash map.
 ================================================
 /*

@@ -1,0 +1,70 @@
+// https://leetcode.com/problems/valid-anagram/
+==============================================================================================================
+Many possible solutions, Here is two:
+
+1. By sorting every string:
+import java.util.Arrays;
+
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        // If the lengths are different, return false immediately
+        if (s.length() != t.length()) {
+            return false;
+        }
+        
+        // Convert both strings to char arrays and sort them
+        char[] sArr = s.toCharArray();
+        char[] tArr = t.toCharArray();
+        Arrays.sort(sArr);
+        Arrays.sort(tArr);
+        
+        // Compare sorted arrays
+        return Arrays.equals(sArr, tArr);
+    }
+}
+
+Time Complexity: O(n log n) — Sorting both strings takes O(n log n), where n is the length of the string.
+Space Complexity: O(n) — We use additional space for storing the character arrays.
+
+
+2. Frequency Count Using an Array
+Since the input strings consist of only lowercase English letters (26 unique characters), 
+we can use an array of size 26 to count the frequency of each character in both strings and compare the counts.
+
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        // If the lengths are different, return false
+        if (s.length() != t.length()) {
+            return false;
+        }
+        
+        // Create an array to count character occurrences
+        int[] count = new int[26];
+        
+        // Count characters in s and subtract for characters in t
+        for (int i = 0; i < s.length(); i++) {
+            count[s.charAt(i) - 'a']++;
+            count[t.charAt(i) - 'a']--;
+        }
+        
+        // If any count is not zero, they are not anagrams
+        for (int i : count) {
+            if (i != 0) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+}
+
+Time Complexity: O(n) — We traverse both strings once, where n is the length of the string.
+Space Complexity: O(1) — We use a fixed-size array of 26 elements for counting.
+==============================================================================================================
+Follow-Up: Handling Unicode Characters
+For Unicode characters, the array-based approach would not work due to the larger range of Unicode values. 
+However, using a HashMap would be effective since it can handle any character set. Here's a general strategy for Unicode inputs:
+
+Use the HashMap approach (Solution 3) to count occurrences of each character.
+Unicode character handling remains the same in Java because char in Java can represent any Unicode character 
+(since char is a 16-bit unsigned data type in Java).
