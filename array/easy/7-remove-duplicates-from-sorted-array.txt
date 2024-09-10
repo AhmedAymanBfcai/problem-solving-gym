@@ -1,0 +1,41 @@
+// https://leetcode.com/problems/remove-duplicates-from-sorted-array
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        // If the array is empty, there are no unique elements
+        if (nums.length == 0) return 0;
+
+        // Pointer j will track the position of unique elements
+        int j = 1;
+
+        // Iterate through the array starting from the second element
+        for (int i = 1; i < nums.length; i++) {
+            // If the current element is not equal to the previous unique element
+            if (nums[i] != nums[i - 1]) {
+                // Place the unique element at position j and increment j
+                nums[j] = nums[i];
+                j++;
+            }
+        }
+
+        // Return the number of unique elements
+        return j;
+    }
+}
+
+Time Complexity: O(n) — We iterate through the array once, where n is the length of the array.
+Space Complexity: O(1) — We use constant extra space (just the two pointers i and j).
+
+Example Walkthrough:
+Input: nums = [1,1,2]
+
+Start: j = 1
+At i = 1: nums[1] == nums[0], so skip it.
+At i = 2: nums[2] != nums[1], so place nums[2] at nums[1] and increment j.
+The result is nums = [1,2,_], and the return value is 2.
+Input: nums = [0,0,1,1,1,2,2,3,3,4]
+
+Start: j = 1
+Iterate through the array and place unique elements in the first j positions.
+The result is nums = [0,1,2,3,4,_,_,_,_,_], and the return value is 5.
+This solution ensures that duplicates are removed in-place while maintaining the order of the unique elements.

@@ -1,0 +1,39 @@
+// https://leetcode.com/problems/remove-element
+
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        // Pointer to track the new position for elements that are not equal to val
+        int j = 0;
+        
+        // Iterate through the array
+        for (int i = 0; i < nums.length; i++) {
+            // If the current element is not equal to val
+            if (nums[i] != val) {
+                // Move it to the index j and increment j
+                nums[j] = nums[i];
+                j++;
+            }
+        }
+        
+        // Return the number of elements that are not equal to val
+        return j;
+    }
+}
+
+
+Time Complexity: O(n) — We iterate through the array once where n is the length of the array.
+Space Complexity: O(1) — No extra space is used other than a few variables.
+
+Example Walkthrough:
+Input: nums = [3,2,2,3], val = 3
+
+We iterate through nums.
+nums[0] = 3 matches val, so we skip it.
+nums[1] = 2 does not match val, so we move it to nums[0].
+nums[2] = 2 does not match val, so we move it to nums[1].
+nums[3] = 3 matches val, so we skip it.
+The result is nums = [2, 2, _, _], and the return value is 2.
+Input: nums = [0,1,2,2,3,0,4,2], val = 2
+
+The array will be modified to nums = [0, 1, 3, 0, 4, _, _, _], and the return value is 5.
+This solution efficiently removes elements in-place, meeting the problem's requirements.
