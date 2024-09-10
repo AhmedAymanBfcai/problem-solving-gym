@@ -1,0 +1,98 @@
+// https://leetcode.com/problems/squares-of-a-sorted-array/
+
+==================================================================
+class Solution {
+    public int[] sortedSquares(int[] nums) {
+        int[] res = new int[nums.length];
+        int left = 0;
+        int right = nums.length - 1;
+
+        for (int i = nums.length - 1; i >= 0; i--) {
+            if (Math.abs(nums[left]) > Math.abs(nums[right])) {
+                res[i] = nums[left] * nums[left];
+                left++;
+            } else {
+                res[i] = nums[right] * nums[right];
+                right--;
+            }
+        }
+        return res;        
+    }
+}
+==================================================================
+
+class Solution {
+    public int[] sortedSquares(int[] nums) {
+        int n = nums.length;
+        int[] result = new int[n];
+        int left = 0;
+        int right = n - 1;
+        int index = n - 1;
+
+        // Use two pointers to iterate from the ends of the array
+        while (left <= right) {
+            int leftSquare = nums[left] * nums[left];
+            int rightSquare = nums[right] * nums[right];
+
+            // Compare squares and put the larger one at the current index
+            if (leftSquare > rightSquare) {
+                result[index] = leftSquare;
+                left++;
+            } else {
+                result[index] = rightSquare;
+                right--;
+            }
+            index--;
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        
+        // Test case 1
+        int[] nums1 = {-4, -1, 0, 3, 10};
+        int[] result1 = solution.sortedSquares(nums1);
+        // Output: [0, 1, 9, 16, 100]
+        for (int num : result1) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+
+        // Test case 2
+        int[] nums2 = {-7, -3, 2, 3, 11};
+        int[] result2 = solution.sortedSquares(nums2);
+        // Output: [4, 9, 9, 49, 121]
+        for (int num : result2) {
+            System.out.print(num + " ");
+        }
+    }
+}
+
+O(n) = Time and Space
+==================================================================
+
+class Solution {
+
+    public int[] sortedSquares(int[] array){
+
+        int N = array.length;
+
+        int[] sorted_squares_array = new int[N];
+
+        for(int left_pointer = 0 , right_pointer = (N - 1) , index = (N - 1) ; (left_pointer <= right_pointer) ; index--){
+
+            if(Math.abs(array[left_pointer]) >= Math.abs(array[right_pointer])){
+                sorted_squares_array[index] = (array[left_pointer] * array[left_pointer]);
+                left_pointer++;
+            }else{
+                sorted_squares_array[index] = (array[right_pointer] * array[right_pointer]);
+                right_pointer--;
+            }
+        }
+
+        return sorted_squares_array;
+    }
+}
+==================================================================
